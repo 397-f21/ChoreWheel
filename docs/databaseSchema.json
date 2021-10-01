@@ -1,0 +1,41 @@
+{
+  "apartmentIdCounter": 0,
+  "apartments": {
+    "idA0": {
+      "taskIdCounter": 0,
+      "tasks": {
+        "idT0": {
+          "title": "Task 1",
+          "interval": 4,
+          "daysRemaining": 2 
+        },
+        "idT1": {
+          "title": "Task 2",
+          "interval": 3,
+          "daysRemaining": 1
+        }
+      },
+      "userIdCounter": 0,
+      "users": {
+        "idU0": {
+          "name": "User 1",
+          "tasks": [
+            {
+              "task": "idT1", 
+              "completed": true
+            }
+          ]
+        },
+        "idU1": {
+          "name": "User 2",
+          "tasks": [
+            {
+              "task": "idT0", 
+              "completed": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

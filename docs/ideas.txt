@@ -9,3 +9,18 @@ task = task-id + nameoftask + description + due-date
 
 At midnight, trigger script to update DB
 
+currentUser 
+data = {}
+1. Slice
+  a. local test frontend
+  b. firebase
+
+---- User Flow ----
+1. Apartment code entry (or create new apartment)
+2. User selection (or create new user)
+3. Task View/Checking Tasks
+4. Other users task progress
+
+
+---- Database Notes ----
+- Last assigned date vs daysRemaining
