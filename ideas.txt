@@ -1,0 +1,11 @@
+Group - create apartment
+Join group = join apartment using code
+
+DB = list of apartments
+apartment = apt-code + listof-users + listof-tasks
+user = user-id + user-name + listof-tuples
+tuple = task-id + complete?
+task = task-id + nameoftask + description + due-date 
+
+At midnight, trigger script to update DB
+
