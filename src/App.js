@@ -105,14 +105,19 @@ const apartmentDB = {
 }
 
 const Task = ({ task }) => (
-  <div className="card m-2 p-2">
-    <div className="card-body">
-      <div className="card-title">{task.title}</div>
-      <div className="card-text">{task.interval}</div>
-      <div className="card-text">{String(task.completed)}</div>
+  <div className='card m-2 p-2 col-lg-8'>
+    <div className="d-flex justify-content-between align-items-center">
+      <div className="card-body">
+        <div className="card-title">{task.title}</div>
+        <div className="card-text">{task.interval}</div>
+      </div>
+      <div /*className="form-switch"*/>
+        <input className="form-check-input" type="checkbox" checked={task.completed} value={task.completed} id="flexCheckDefault"/>
+      </div>
     </div>
   </div>
 );
+
 
 const TaskList = ({ tasks }) => (
   <div>
