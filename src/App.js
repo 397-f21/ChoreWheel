@@ -125,6 +125,18 @@ const TaskList = ({ tasks }) => (
   </div>
 );
 
+const UserList = ({users}) => (
+  <div>
+    {Object.keys(users).map((userkey) => <UserButton id={userkey} name={users[userkey].name}/>)}
+  </div>
+)
+
+const UserButton = ({id,name}) => (
+  <div>
+    {id}{name}
+  </div>
+)
+
 const getTask = (taskId, aptId) => (
   apartmentDB.apartments[aptId].tasks[taskId]
 );
@@ -134,6 +146,7 @@ function App() {
     <div className='container' >
       <h1 > Hi {apartmentDB.apartments.idA0.users.idU0.name}, your tasks are </h1>
       <TaskList tasks={apartmentDB.apartments.idA0.users.idU0.tasks.map( task => ({...getTask(task.task, "idA0"), completed:task.completed}))} />
+      <UserList users={apartmentDB.apartments.idA0.users} />
     </div >
   );
 }
