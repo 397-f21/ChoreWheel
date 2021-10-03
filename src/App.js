@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const apartmentDB = {
   "apartments": {
@@ -55,6 +53,10 @@ const apartmentDB = {
           "tasks": [{
             "task": "idT1",
             "completed": true
+          },
+          {
+            "task": "idT0",
+            "completed": false
           }]
         },
         "idU1": {
@@ -103,22 +105,30 @@ const apartmentDB = {
 }
 
 const Task = ({ task }) => (
-  <div>
-    {task}
+  <div className="card m-2 p-2">
+    <div className="card-body">
+      <div className="card-title">{task.title}</div>
+      <div className="card-text">{task.interval}</div>
+      <div className="card-text">{String(task.completed)}</div>
+    </div>
   </div>
 );
 
 const TaskList = ({ tasks }) => (
   <div>
-    {Object.values(tasks).map(task => <Task key={task.task} task={task.task} />)}
+    {Object.values(tasks).map( (task, idx) => <Task key={idx} task={task} />)}
   </div>
+);
+
+const getTask = (taskId, aptId) => (
+  apartmentDB.apartments[aptId].tasks[taskId]
 );
 
 function App() {
   return (
-    <div>
+    <div className='container' >
       <h1 > Hi {apartmentDB.apartments.idA0.users.idU0.name}, your tasks are </h1>
-      <TaskList tasks={apartmentDB.apartments.idA0.users.idU0.tasks} />
+      <TaskList tasks={apartmentDB.apartments.idA0.users.idU0.tasks.map( task => ({...getTask(task.task, "idA0"), completed:task.completed}))} />
     </div >
   );
 }
