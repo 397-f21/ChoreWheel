@@ -132,9 +132,7 @@ const UserList = ({users}) => (
 )
 
 const UserButton = ({id,name}) => (
-  <div>
-    {id}{name}
-  </div>
+  <button type="button" className="btn btn-primary m-2"> {name} </button>
 )
 
 const getTask = (taskId, aptId) => (
