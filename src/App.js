@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 
 const apartmentDB = {
   "apartments": {
@@ -125,26 +126,29 @@ const TaskList = ({ tasks }) => (
   </div>
 );
 
-const UserList = ({users}) => (
+const UserList = ({users, setUser, apt}) => (
   <div>
-    {Object.keys(users).map((userkey) => <UserButton id={userkey} name={users[userkey].name}/>)}
+    {Object.values(users).map((user, idx) => <UserButton user={user} setUser ={setUser}/>)}
   </div>
 )
 
-const UserButton = ({id,name}) => (
-  <button type="button" className="btn btn-primary m-2"> {name} </button>
+const UserButton = ({user, setUser}) => (
+  <button type="button" className="btn btn-primary m-2"> {user.name} </button>
 )
 
-const getTask = (taskId, aptId) => (
-  apartmentDB.apartments[aptId].tasks[taskId]
+const getTask = (taskId, apt) => (
+  apt.tasks[taskId]
 );
 
 function App() {
+  const [apt, setApt] = useState(apartmentDB.apartments.idA0);
+  const [user, setUser] = useState(apt.users.idU0);
+
   return (
     <div className='container' >
-      <h1 > Hi {apartmentDB.apartments.idA0.users.idU0.name}, your tasks are </h1>
-      <TaskList tasks={apartmentDB.apartments.idA0.users.idU0.tasks.map( task => ({...getTask(task.task, "idA0"), completed:task.completed}))} />
-      <UserList users={apartmentDB.apartments.idA0.users} />
+      <h1 > Hi {user.name}, your tasks are </h1>
+      <TaskList tasks={user.tasks.map( task => ({...getTask(task.task, apt), completed:task.completed}))} />
+      <UserList users={apt.users} setUser = {setUser}/>
     </div >
   );
 }
