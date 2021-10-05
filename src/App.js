@@ -52,7 +52,7 @@ const apartmentDB = {
           "id" : "idT7",
           "title": "vacuum floor",
           "interval": 3,
-          "daysRemaining": 1
+          "daysRemaining": 0
         },
       },
       "userIdCounter": 0,
@@ -106,20 +106,25 @@ const apartmentDB = {
   }
 }
 
-const Task = ({ task, updateTask }) => (
-  <div className='card m-2 p-2 col-lg-8' key={task.id}>
+const Task = ({ task, updateTask }) => {
+  const currDate = new Date();
+  currDate.setDate(currDate.getDate() + task.daysRemaining);
+
+  return (
+  <div className={`card m-2 p-2 col-lg-8 ${task.daysRemaining === 0 && 'border-warning'}`} style={{backgroundColor: task.completed? 'lightgreen' : 'white'}} key={task.id}>
     <div className="d-flex justify-content-between align-items-center">
-      <div className="card-body">
-        <div className="card-title">{task.title}</div>
-        <div className="card-text">{task.interval}</div>
+      <div className={'card-body'}>
+        <div className="card-title"><b>Task:</b> {task.title}</div>
+        <div className="card-text"><b>Due:</b> {currDate.toDateString()}</div>
       </div>
       <div /*className="form-switch"*/>
         <input className="form-check-input" type="checkbox" defaultChecked={task.completed} value={task.completed} id="flexCheckDefault"
-        onChange={ updateTask(task.id)}/>
+        onChange={ () => updateTask(task.id) }/>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 
 const TaskList = ({ tasks, updateTask }) => (
@@ -136,7 +141,7 @@ const UserList = ({users, setUser}) => (
 
 const UserButton = ({user, setUser}) => (
   <button type="button" className="btn btn-primary m-2"
-  onClick={() => setUser(user)}> {user.name} </button>
+  onClick={() => setUser(user.id)}> {user.name} </button>
 )
 
 const getTask = (taskId, apt) => (
@@ -145,16 +150,21 @@ const getTask = (taskId, apt) => (
 
 function App() {
   const [apt, setApt] = useState(apartmentDB.apartments.idA0);
-  const [user, setUser] = useState(apt.users.idU0);
+  const [user, setUser] = useState('idU0');
+
+  const userData = apt.users[user];
   const updateTask = (taskID) => {
-    apt.users[user.id].tasks[taskID] = apt.users[user.id].tasks[taskID];
+    const newApt = {...apt};
+    newApt.users[userData.id].tasks[taskID] = !newApt.users[userData.id].tasks[taskID];
+    setApt(newApt);
   }
+
 
   return (
     <div className='container' >
-      <h1 > Hi {user.name}, your tasks are </h1>
-      <TaskList tasks={Object.keys(user.tasks).map( taskID => ({...getTask(taskID, apt), completed:user.tasks[taskID]}))} updateTask={updateTask} />
-      <UserList users={apt.users} setUser = {setUser}/>
+      <h1 > Hi {userData.name}, your tasks are </h1>
+      <TaskList tasks={Object.keys(userData.tasks).map( taskID => ({...getTask(taskID, apt), completed:userData.tasks[taskID]}))} updateTask={updateTask} />
+      <UserList users={apt.users} setUser={setUser} />
     </div >
   );
 }
