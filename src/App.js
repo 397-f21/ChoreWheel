@@ -58,7 +58,7 @@ const apartmentDB = {
       "userIdCounter": 0,
       "users": {
         "idU0": {
-          "name": "sathu",
+          "name": "Sathu",
           "id" : "idU0",
           "tasks": {
             "idT1" : true,
@@ -111,7 +111,7 @@ const Task = ({ task, updateTask }) => {
   currDate.setDate(currDate.getDate() + task.daysRemaining);
 
   return (
-  <div className={`card m-2 p-2 col-lg-8 ${task.daysRemaining === 0 && 'border-warning'}`} style={{backgroundColor: task.completed? 'lightgreen' : 'white'}} key={task.id}>
+  <div className={`card m-2 p-2 col-lg-8 ${task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : 'border-dark'}`} style={{borderWidth: '4px'}} key={task.id}>
     <div className="d-flex justify-content-between align-items-center">
       <div className={'card-body'}>
         <div className="card-title"><b>Task:</b> {task.title}</div>
@@ -133,15 +133,20 @@ const TaskList = ({ tasks, updateTask }) => (
   </div>
 );
 
-const UserList = ({users, setUser}) => (
-  <div>
-    {Object.values(users).map((user, idx) => <UserButton user={user} setUser ={setUser} key={idx}/>)}
+const UserList = ({currUser, users, setUser}) => (
+  <div className="container text-center">
+    {users.map((user, idx) => <UserButton user={user} selected={user.id === currUser}setUser={setUser} key={idx}/>)}
   </div>
+  
 )
 
-const UserButton = ({user, setUser}) => (
-  <button type="button" className="btn btn-primary m-2"
-  onClick={() => setUser(user.id)}> {user.name} </button>
+const UserButton = ({user, selected, setUser}) => (
+  <button type="button" 
+      className={`btn m-2 ${selected ? 'btn-primary' : 'btn-outline-primary'}`}
+      disabled={selected}
+      onClick={() => setUser(user.id)}> 
+    {user.name} 
+  </button>
 )
 
 const getTask = (taskId, apt) => (
@@ -163,8 +168,9 @@ function App() {
   return (
     <div className='container' >
       <h1 > Hi {userData.name}, your tasks are </h1>
-      <TaskList tasks={Object.keys(userData.tasks).map( taskID => ({...getTask(taskID, apt), completed:userData.tasks[taskID]}))} updateTask={updateTask} />
-      <UserList users={apt.users} setUser={setUser} />
+        <TaskList tasks={Object.keys(userData.tasks).map( taskID => ({...getTask(taskID, apt), completed:userData.tasks[taskID]}))} updateTask={updateTask} />
+        <UserList currUser={user} users={Object.values(apt.users)} setUser={setUser} />
+      
     </div >
   );
 }
