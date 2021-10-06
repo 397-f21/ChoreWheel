@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import { useData, setData } from './firebase';
 
 const apartmentDB = {
   "apartments": {
