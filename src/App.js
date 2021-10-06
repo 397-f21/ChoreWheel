@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useData, setData } from './firebase';
-
+import { FaDharmachakra } from 'react-icons/fa';
 
 
 const Task = ({ task, updateTask }) => {
@@ -9,7 +9,7 @@ const Task = ({ task, updateTask }) => {
   currDate.setDate(currDate.getDate() + task.daysRemaining);
 
   return (
-  <div className={`card m-2 p-2 col-lg-8 ${task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : 'border-dark'}`} style={{borderWidth: '4px'}} key={task.id}>
+  <div className={`card m-2 p-2 col-lg-8 mx-auto ${task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : 'border-dark'}`} style={{borderWidth: '4px'}} key={task.id}>
     <div className="d-flex justify-content-between align-items-center">
       <div className={'card-body'}>
         <div className="card-title"><b>Task:</b> {task.title}</div>
@@ -65,12 +65,28 @@ function App() {
 
 
   return (
-    <div className='container' >
-      <h1 > Hi {userData.name}, your tasks are </h1>
-        <TaskList tasks={Object.keys(userData.tasks).map( taskID => ({...getTask(taskID, apt), completed:userData.tasks[taskID]}))} updateTask={updateTask} />
-        <UserList currUser={user} users={Object.values(apt.users)} setUser={setUser} />
-      
-    </div >
+    <div>
+      <div className='navbar navbar-light bg-light'>
+        <div className='container-fluid'>
+          <span className='navbar-brand justify-content-bottom'>
+            <FaDharmachakra size="1.7em" style={{color: '#d4af37', marginTop: '-.4em'}}/>
+            <span className="h2 fw-bold"> ChoreWheel </span>
+          </span>
+        </div>
+      </div>
+
+      <div className='container pt-2' >
+        <h2 className='text-center'>Hi {userData.name}, your tasks are </h2>
+        <TaskList 
+            tasks={Object.keys(userData.tasks).map( taskID => ({...getTask(taskID, apt), completed:userData.tasks[taskID]}))} 
+            updateTask={updateTask} />
+        <UserList 
+            currUser={user} 
+            users={Object.values(apt.users)} 
+            setUser={setUser} />
+      </div >
+    </div>
+    
   );
 }
 
