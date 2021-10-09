@@ -58,7 +58,7 @@ function App() {
   const [user, setUser] = useState('idU0');  
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the tasks...</h1>;
-  if (!aptId) return <ApartmentLogin onFinish = {setApt}/>;
+  if (!aptId) return <ApartmentLogin onFinish = {setApt} aptKeys={Object.keys(data)}/>;
   const apt = data[aptId];
   const userData = apt.users[user];
   const updateTask = (taskID) => {
