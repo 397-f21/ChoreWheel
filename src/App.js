@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useData, setData } from './firebase';
 import { FaDharmachakra } from 'react-icons/fa';
+import ApartmentLogin from './ApartmentLogin';
 
 
 const Task = ({ task, updateTask }) => {
@@ -52,17 +53,20 @@ const getTask = (taskId, apt) => (
 );
 
 function App() {
-  const [aptId, setApt] = useState('idA0')
-  const [apt, loading, error] = useData(`/apartments/${aptId}`);
-  const [user, setUser] = useState('idU0');
+  const [aptId, setApt] = useState();
+  const [data, loading, error] = useData(`/apartments`);
+  const [user, setUser] = useState('idU0');  
   if (error) return <h1>{error}</h1>;
-  if (loading) return <h1>Loading the tasks...</h1>
+  if (loading) return <h1>Loading the tasks...</h1>;
+  if (!aptId) return <ApartmentLogin onFinish = {setApt}/>;
+  const apt = data[aptId];
   const userData = apt.users[user];
   const updateTask = (taskID) => {
     setData(`/apartments/${aptId}/users/${user}/tasks/${taskID}`, !userData.tasks[taskID])
 
   }
-
+ 
+  
 
   return (
     <div>
