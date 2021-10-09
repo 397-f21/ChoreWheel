@@ -63,7 +63,7 @@ const ApartmentTaskList = ({users, tasks, updateTask}) => (
 function App() {
   const [aptId, setApt] = useState();
   const [data, loading, error] = useData(`/apartments`);
-  const [user, setUser] = useState();  
+  const [user, setUser] = useState('');  
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the tasks...</h1>;
   if (!aptId) return <ApartmentLogin onFinish = {setApt} aptKeys={Object.keys(data)}/>;
@@ -96,7 +96,7 @@ function App() {
         ) }
         <UserList 
             currUser={user} 
-            users={Object.values(apt.users)} 
+            users={[{id:'', name:'Full Apartment'}, ...Object.values(apt.users)]} 
             setUser={setUser} />
       </div >
     </div>
