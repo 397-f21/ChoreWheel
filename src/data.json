@@ -1,0 +1,104 @@
+{
+    "apartments": {
+        "idA0": {
+            "taskIdCounter": 8,
+            "tasks": {
+                "idT0": {
+                    "id" : "idT0",
+                    "title": "Cleaning Kitchen",
+                    "interval": 4,
+                    "daysRemaining": 2
+                },
+                "idT1": {
+                    "id" : "idT1",
+                    "title": "Cleaning washroom",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT2": {
+                    "id" : "idT2",
+                    "title": "Checking mail",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT3": {
+                    "id" : "idT3",
+                    "title": "Taking trash out",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT4": {
+                    "id" : "idT4",
+                    "title": "Cleaning dishes",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT5": {
+                    "id" : "idT5",
+                    "title": "get groceries",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT6": {
+                    "id" : "idT6",
+                    "title": "Cleaning stovetop",
+                    "interval": 3,
+                    "daysRemaining": 1
+                },
+                "idT7": {
+                    "id" : "idT7",
+                    "title": "vacuum floor",
+                    "interval": 3,
+                    "daysRemaining": 0
+                }
+            },
+            "userIdCounter": 0,
+            "users": {
+                "idU0": {
+                    "name": "Sathu",
+                    "id" : "idU0",
+                    "tasks": {
+                    "idT1" : true,
+                    "idT0" : true
+                    }
+                },
+                "idU1": {
+                    "name": "Caspar",
+                    "id" : "idU1",
+                    "tasks": {
+                    "idT0" : false,
+                    "idT7" : false
+                    }
+                },
+                "idU2": {
+                    "id" : "idU2",
+                    "name": "Jun Li",
+                    "tasks": {
+                    "idT2" : true
+                    }
+                },
+                "idU3": {
+                    "id" : "idU3",
+                    "name": "Omar",
+                    "tasks": {
+                    "idT3" :  true
+                    }
+                },
+                "idU4": {
+                    "id" : "idU4",
+                    "name": "Spencer",
+                    "tasks": {
+                    "idT4" : true
+                    }
+                },
+                "idU5": {
+                    "id" : "idU5",
+                    "name": "Yifei",
+                    "tasks": {
+                    "idT5" : true
+                    }
+                }
+            }
+        }
+    }
+}
