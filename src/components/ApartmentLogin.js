@@ -10,7 +10,8 @@ const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
           if (aptKeys.includes(input.value)) {
             onFinish(input.value)
           } else {
-            alert('This ID does not exist')
+            alert(`Specified Apartment ID "${input.value}" does not exist`)
+            input.value = '';
           }
         }
       }> 

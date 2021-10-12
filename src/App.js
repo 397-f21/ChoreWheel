@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useData, setData } from './firebase';
 import { FaDharmachakra } from 'react-icons/fa';
-import ApartmentLogin from './ApartmentLogin';
+import ApartmentLogin from './components/ApartmentLogin';
 import ApartmentTaskList from './components/ApartmentTaskList';
 import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
@@ -41,6 +41,10 @@ function App() {
       </div>
 
       <div className='container pt-2' >
+          <UserButtonGroup 
+            currUser={ user } 
+            users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
+            setUser={ setUser } />
         { user ?  (
           <UserTaskList 
             tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
@@ -51,10 +55,6 @@ function App() {
             tasks={ apt.tasks }
           />
         ) }
-        <UserButtonGroup 
-            currUser={ user } 
-            users={ [{id:'', name:'Full Apartment'}, ...Object.values(apt.users)] } 
-            setUser={ setUser } />
       </div >
     </div>
     
