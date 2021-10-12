@@ -3,91 +3,14 @@ import { useState } from 'react';
 import { useData, setData } from './firebase';
 import { FaDharmachakra } from 'react-icons/fa';
 import ApartmentLogin from './ApartmentLogin';
-
-
-const Task = ({ task, children }) => {
-  const currDate = new Date();
-  currDate.setDate(currDate.getDate() + task.daysRemaining);
-
-  return (
-  <div key={task.id} 
-      className={`card m-2 p-2 col-lg-8 mx-auto ${ task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : 'border-dark'}`} 
-      style={{borderWidth: '4px'}} >
-    <div className="d-flex justify-content-between align-items-center">
-      <div className="card-body">
-        <div className="card-title">
-          <b>Task:</b> { task.title }
-        </div>
-        <div className="card-text">
-          <b>Due:</b> { currDate.toDateString() }
-        </div>
-      </div>
-      {children}
-    </div>
-  </div>
-  );
-};
-
-
-
-const TaskList = ({ tasks, updateTask }) => (
-  <div>
-    {
-      Object.values(tasks).map((task, idx) => (
-      <Task key={idx} task={task}>
-        <div >
-          <input type="checkbox"
-            className="form-check-input"  
-            defaultChecked={task.completed} 
-            value={task.completed} id="flexCheckDefault"
-            onChange={ () => updateTask(task.id) } />
-        </div>
-      </Task>
-      ))}
-  </div>
-);
-
-const UserList = ({ currUser, users, setUser }) => (
-  <div className="container text-center">
-    {
-      users.map((user, idx) => (
-        <UserButton key={idx}
-            user={user} 
-            selected={user.id === currUser}
-            setUser={setUser} />
-      ))
-    }
-  </div>
-  
-)
-
-const UserButton = ({ user, selected, setUser }) => (
-  <button type="button" 
-      className={`btn m-2 ${selected ? 'btn-primary' : 'btn-outline-primary'}`}
-      disabled={ selected }
-      onClick={ () => setUser(user.id) }> 
-    { user.name } 
-  </button>
-)
+import ApartmentTaskList from './components/ApartmentTaskList';
+import UserTaskList from './components/UserTaskList';
+import UserButtonGroup from './components/UserButtonGroup';
 
 const getTask = (taskId, apt) => (
   apt.tasks[taskId]
 );
 
-const ApartmentTaskList = ({ users, tasks}) => (
-  <div>
-    {
-      Object.values(users).map( (user, idx) => (
-        Object.keys(user.tasks).map( (taskId, taskIdx) => (
-          <Task key={`${idx}-${taskIdx}`} 
-              task={{...tasks[taskId], completed:user.tasks[taskId]}}>
-                {user.name}
-          </Task>
-        ))
-      ))
-    }
-  </div>
-)
 
 function App() {
   const [aptId, setApt] = useState();
@@ -119,7 +42,7 @@ function App() {
 
       <div className='container pt-2' >
         { user ?  (
-          <TaskList 
+          <UserTaskList 
             tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
             updateTask={ updateTask}  />
         ) : (
@@ -128,7 +51,7 @@ function App() {
             tasks={ apt.tasks }
           />
         ) }
-        <UserList 
+        <UserButtonGroup 
             currUser={ user } 
             users={ [{id:'', name:'Full Apartment'}, ...Object.values(apt.users)] } 
             setUser={ setUser } />
@@ -138,6 +61,6 @@ function App() {
   );
 }
 
-/* <h2 className='text-center'>Hi {userData.name}, your tasks are </h2> */
+/* <h2 className='text-center'>Hi {userData.name}, your tasks are </h2>  */
 
 export default App;
