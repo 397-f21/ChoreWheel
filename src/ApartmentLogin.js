@@ -20,20 +20,15 @@ const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
 
 function ApartmentLogin ({ onFinish, aptKeys }) {
   return (
-    <form>
+    <form className="container">
       <div class="form-group">
         <label for="exampleInputEmail1">
           Apartment ID
         </label>
-        <input type="email" 
+        <input type="name" 
             class="form-control" 
             id="apt_input" 
-            aria-describedby="emailHelp" 
-            placeholder="Enter email" />
-        <small id="emailHelp" 
-            class="form-text text-muted">
-          We'll never share your email with anyone else.
-        </small>
+            placeholder="Enter Aparmtent ID" />
       </div>
       <ApartmentLoginButton onFinish={onFinish} aptKeys={aptKeys}/>
     </form>

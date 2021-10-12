@@ -5,7 +5,7 @@ import { FaDharmachakra } from 'react-icons/fa';
 import ApartmentLogin from './ApartmentLogin';
 
 
-const Task = ({ task, updateTask }) => {
+const Task = ({ task, children }) => {
   const currDate = new Date();
   currDate.setDate(currDate.getDate() + task.daysRemaining);
 
@@ -22,24 +22,28 @@ const Task = ({ task, updateTask }) => {
           <b>Due:</b> { currDate.toDateString() }
         </div>
       </div>
-      <div /*className="form-switch"*/>
-        <input type="checkbox"
-            className="form-check-input"  
-            defaultChecked={task.completed} 
-            value={task.completed} id="flexCheckDefault"
-            onChange={ () => updateTask(task.id) } />
-      </div>
+      {children}
     </div>
   </div>
   );
 };
 
 
+
 const TaskList = ({ tasks, updateTask }) => (
   <div>
     {
-      Object.values(tasks).map((task, idx) => <Task key={idx} task={task} updateTask={updateTask} />)
-    }
+      Object.values(tasks).map((task, idx) => (
+      <Task key={idx} task={task}>
+        <div >
+          <input type="checkbox"
+            className="form-check-input"  
+            defaultChecked={task.completed} 
+            value={task.completed} id="flexCheckDefault"
+            onChange={ () => updateTask(task.id) } />
+        </div>
+      </Task>
+      ))}
   </div>
 );
 
@@ -70,14 +74,15 @@ const getTask = (taskId, apt) => (
   apt.tasks[taskId]
 );
 
-const ApartmentTaskList = ({ users, tasks, updateTask }) => (
+const ApartmentTaskList = ({ users, tasks}) => (
   <div>
     {
       Object.values(users).map( (user, idx) => (
         Object.keys(user.tasks).map( (taskId, taskIdx) => (
           <Task key={`${idx}-${taskIdx}`} 
-              task={{...tasks[taskId], completed:user.tasks[taskId]}} 
-              updateTask={updateTask} />
+              task={{...tasks[taskId], completed:user.tasks[taskId]}}>
+                {user.name}
+          </Task>
         ))
       ))
     }
@@ -121,7 +126,7 @@ function App() {
           <ApartmentTaskList 
             users={ apt.users } 
             tasks={ apt.tasks }
-            updateTask={ updateTask } />
+          />
         ) }
         <UserList 
             currUser={ user } 
