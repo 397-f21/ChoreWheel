@@ -6,6 +6,7 @@ import ApartmentLogin from './components/ApartmentLogin';
 import ApartmentTaskList from './components/ApartmentTaskList';
 import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
+import AddTask from './components/TaskManagement';
 
 import {Modal} from 'react-bootstrap';
 
@@ -56,47 +57,7 @@ function App() {
         <button onClick={handleShow}>
           Create Task
         </button>
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Header>
-            <Modal.Title>Add Task</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <div class="form-group p-2">
-                <label for="exampleFormControlInput1">Task:</label>
-                <input class="form-control" id="exampleFormControlInput1" placeholder="Task name" maxLength={50} />
-              </div>
-              <div className="form-group p-2">
-                <label htmlFor="exampleFormControlSelect1">Assign to:</label>
-                <select className="form-select" id="exampleFormControlSelect1">
-                  <option disabled>Choose a user</option>
-                  <option>user 1</option>
-                  <option>user 2</option>
-                  <option>user 3</option>
-                  <option>user 4</option>
-                  <option>user 5</option>
-                </select>
-              </div>
-              <div className="form-group p-2">
-                <label htmlFor="exampleFormControlSelect2">Repeat interval:</label>
-                <input className="form-control" type="number" min="1" step="1" pattern="\d+" placeholder="How often the task should rotate"/>
-              </div>
-              <div className="form-group p-2">
-                <label htmlFor="exampleFormControlSelect2">First due date:</label>
-                <input className="form-control" type="date" onChange={(ev) => {const date = new Date(ev.target.value.slice(0,4), Number(ev.target.value.slice(5,7))-1, ev.target.value.slice(8)); console.log(date);}}/>
-              </div>
-              
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <button className='btn btn-secondary' onClick={handleClose}>
-              Close
-            </button>
-            <button className='btn btn-primary' onClick={handleClose}>
-              Save Changes
-            </button>
-          </Modal.Footer>
-        </Modal>
+        <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} />
         { user ?  (
           <UserTaskList 
             tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
