@@ -27,7 +27,7 @@ const AddTask = () => (
             </div>
 
             <button type="submit" class="btn btn-primary m-2">Add task</button>
-            <button type="submit" class="btn btn-secondary m-2">Cancel</button>
+            <button type="cancel" class="btn btn-secondary m-2">Cancel</button>
         </form>
     </div>
 )
