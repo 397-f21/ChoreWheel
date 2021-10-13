@@ -1,12 +1,24 @@
 import {Modal} from 'react-bootstrap';
+import { pushData, setData, getRefByPush} from '../firebase';
+
+import { getDatabase, onValue, ref, update, push } from 'firebase/database';
 
 
 
-const createTask = () => {
-    
+const  createTask = async ( task, aptId ) => {
+  try {
+    const taskRef = getRefByPush(`/apartments/${aptId}/tasks`);
+    const taskKey = taskRef.key;
+    task = ({...task, 'id':taskKey});
+   // taskRef.push(task);
+    update(taskRef, task);
+     
+  } catch (error) {
+    alert(error);
+  }
 }
 
-const validateForm = () => {
+const validateForm = (aptId) => {
     const taskName = document.querySelector('#taskName').value;
     const assignedUser = document.querySelector('#assignUser').value;
     const interval = document.querySelector('#interval').value;
@@ -37,17 +49,26 @@ const validateForm = () => {
       return
     }
 
+    const daysRemaining = dueDate - currDate;
+
     const intervalNum = Number(interval)
 
     if (intervalNum < 1 || !Number.isInteger(intervalNum) ){
       alert('Please enter positive whole number')
+      return
     }
-    
 
+    const task =  { 
+                    "daysRemaining": daysRemaining,
+                    "interval": intervalNum,
+                    "title": taskName
+                  }
+
+    createTask(task, aptId);
 
 }
 
-const AddTask = ({show, handleClose,users}) =>  (
+const AddTask = ({show, handleClose,users, aptId}) =>  (
     <Modal show={show} onHide={handleClose} animation={false}>
     <Modal.Header>
       <Modal.Title>Add Task</Modal.Title>
@@ -80,7 +101,7 @@ const AddTask = ({show, handleClose,users}) =>  (
       <button className='btn btn-secondary' onClick={handleClose}>
         Close
       </button>
-      <button className='btn btn-primary' onClick={validateForm}>
+      <button className='btn btn-primary' onClick={() => validateForm(aptId)}>
         Save Changes
       </button>
     </Modal.Footer>

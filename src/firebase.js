@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set } from 'firebase/database';
+import { getDatabase, onValue, ref, set, push } from 'firebase/database';
 import { useEffect, useState } from 'react';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-GZHRx2kkBDY-eVJAPSKr6lJ0XW-8FTw",
@@ -20,6 +21,7 @@ export const useData = (path, transform) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+
 
   useEffect (() => {
     const dbRef = ref(database, path);
@@ -44,3 +46,12 @@ export const useData = (path, transform) => {
 export const setData = (path, value) => (
   set(ref(database, path), value)
 );
+
+export const pushData = (path, value) => (
+  push(ref(database, path), value)
+);
+
+export const getRefByPush = (path) => (
+  push(ref(database, path))
+)
+

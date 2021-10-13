@@ -57,7 +57,7 @@ function App() {
         <button onClick={handleShow}>
           Create Task
         </button>
-        <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} />
+        <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
         { user ?  (
           <UserTaskList 
             tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
