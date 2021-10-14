@@ -4,98 +4,111 @@
             "taskIdCounter": 8,
             "tasks": {
                 "idT0": {
-                    "id" : "idT0",
-                    "title": "Cleaning Kitchen",
+                    "daysRemaining": 2,
+                    "id": "idT0",
                     "interval": 4,
-                    "daysRemaining": 2
+                    "title": "Cleaning kitchen"
                 },
                 "idT1": {
-                    "id" : "idT1",
-                    "title": "Cleaning washroom",
+                    "daysRemaining": 1,
+                    "id": "idT1",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Cleaning washroom"
                 },
                 "idT2": {
-                    "id" : "idT2",
-                    "title": "Checking mail",
+                    "daysRemaining": 1,
+                    "id": "idT2",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Checking mail"
                 },
                 "idT3": {
-                    "id" : "idT3",
-                    "title": "Taking trash out",
+                    "daysRemaining": 1,
+                    "id": "idT3",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Taking trash out"
                 },
                 "idT4": {
-                    "id" : "idT4",
-                    "title": "Cleaning dishes",
+                    "daysRemaining": 1,
+                    "id": "idT4",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Cleaning dishes"
                 },
                 "idT5": {
-                    "id" : "idT5",
-                    "title": "get groceries",
+                    "daysRemaining": 1,
+                    "id": "idT5",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Get groceries"
                 },
                 "idT6": {
-                    "id" : "idT6",
-                    "title": "Cleaning stovetop",
+                    "daysRemaining": 1,
+                    "id": "idT6",
                     "interval": 3,
-                    "daysRemaining": 1
+                    "title": "Cleaning stovetop"
                 },
                 "idT7": {
-                    "id" : "idT7",
-                    "title": "vacuum floor",
+                    "daysRemaining": 0,
+                    "id": "idT7",
                     "interval": 3,
-                    "daysRemaining": 0
+                    "title": "Vacuum floor"
+                },
+                "idT8": {
+                    "daysRemaining": 2,
+                    "id": "idT8",
+                    "interval": 3,
+                    "title": "Vacuum couch"
+                },
+                "idT9": {
+                    "daysRemaining": 1,
+                    "id": "idT9",
+                    "interval": 3,
+                    "title": "Get cleaning supplies"
                 }
             },
-            "userIdCounter": 0,
+            "userIdCounter": 6,
             "users": {
                 "idU0": {
-                    "name": "Sathu",
-                    "id" : "idU0",
+                    "id": "idU0",
+                    "name": "Omar",
                     "tasks": {
-                    "idT1" : true,
-                    "idT0" : true
+                        "idT1": true,
+                        "idT6": false
                     }
                 },
                 "idU1": {
+                    "id": "idU1",
                     "name": "Caspar",
-                    "id" : "idU1",
                     "tasks": {
-                    "idT0" : false,
-                    "idT7" : false
+                        "idT0": false,
+                        "idT7": false
                     }
                 },
                 "idU2": {
-                    "id" : "idU2",
+                    "id": "idU2",
                     "name": "Jun Li",
                     "tasks": {
-                    "idT2" : true
+                        "idT2": false,
+                        "idT8": true
                     }
                 },
                 "idU3": {
-                    "id" : "idU3",
-                    "name": "Omar",
+                    "id": "idU3",
+                    "name": "Sathu",
                     "tasks": {
-                    "idT3" :  true
+                        "idT3": true
                     }
                 },
                 "idU4": {
-                    "id" : "idU4",
+                    "id": "idU4",
                     "name": "Spencer",
                     "tasks": {
-                    "idT4" : true
+                        "idT4": false
                     }
                 },
                 "idU5": {
-                    "id" : "idU5",
+                    "id": "idU5",
                     "name": "Yifei",
                     "tasks": {
-                    "idT5" : true
+                        "idT5": true
                     }
                 }
             }
