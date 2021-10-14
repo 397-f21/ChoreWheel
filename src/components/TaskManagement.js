@@ -1,9 +1,5 @@
 import {Modal} from 'react-bootstrap';
-import { pushData, setData, updateData, getRefByPush, updateDataByPath} from '../firebase';
-
-import { getDatabase, onValue, ref, update, push } from 'firebase/database';
-
-
+import { updateData, getRefByPush, updateDataByPath} from '../firebase';
 
 const createTask = async ( task, aptId, userID ) => {
   try {

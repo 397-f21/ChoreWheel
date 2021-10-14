@@ -8,8 +8,6 @@ import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
 import AddTask from './components/TaskManagement';
 
-import {Modal} from 'react-bootstrap';
-
 const getTask = (taskId, apt) => (
   apt.tasks[taskId]
 );
