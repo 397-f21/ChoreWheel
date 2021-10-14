@@ -37,6 +37,11 @@ function App() {
 
   return (
     <div>
+      <button className="btn btn-primary rounded-circle  fw-bold" style={{lineHeight:"20px", fontSize:"30px", width:"50px", height:"50px", position:"fixed", right:"10px", bottom:"90px", zIndex:10}} onClick={handleShow}>
+          +
+      </button>
+
+    <div>
       <div className='navbar navbar-light bg-light'>
         <div className='container-fluid'>
           <span className='navbar-brand justify-content-bottom'>
@@ -54,9 +59,6 @@ function App() {
             users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
             setUser={ setUser } />
 
-        <button onClick={handleShow}>
-          Create Task
-        </button>
         <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
         { user ?  (
           <UserTaskList 
@@ -69,6 +71,7 @@ function App() {
           />
         ) }
       </div >
+    </div>
     </div>
     
   );
