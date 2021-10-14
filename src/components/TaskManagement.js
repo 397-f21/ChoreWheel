@@ -1,24 +1,26 @@
 import {Modal} from 'react-bootstrap';
-import { pushData, setData, getRefByPush} from '../firebase';
+import { pushData, setData, updateData, getRefByPush, updateDataByPath} from '../firebase';
 
 import { getDatabase, onValue, ref, update, push } from 'firebase/database';
 
 
 
-const  createTask = async ( task, aptId ) => {
+const createTask = async ( task, aptId, userID ) => {
   try {
     const taskRef = getRefByPush(`/apartments/${aptId}/tasks`);
     const taskKey = taskRef.key;
     task = ({...task, 'id':taskKey});
    // taskRef.push(task);
-    update(taskRef, task);
-     
+    updateData(taskRef, task);
+
+    updateDataByPath(`/apartments/${aptId}/users/${userID}/tasks`, {[taskKey] : false});
+
   } catch (error) {
     alert(error);
   }
 }
 
-const validateForm = (aptId) => {
+const validateForm = (aptId, handleClose) => {
     const taskName = document.querySelector('#taskName').value;
     const assignedUser = document.querySelector('#assignUser').value;
     const interval = document.querySelector('#interval').value;
@@ -49,7 +51,7 @@ const validateForm = (aptId) => {
       return
     }
 
-    const daysRemaining = dueDate - currDate;
+    const daysRemaining = Number((dueDate - currDate) / (1000 * 3600 * 24));
 
     const intervalNum = Number(interval)
 
@@ -64,8 +66,8 @@ const validateForm = (aptId) => {
                     "title": taskName
                   }
 
-    createTask(task, aptId);
-
+    createTask(task, aptId, assignedUser);
+    handleClose();
 }
 
 const AddTask = ({show, handleClose,users, aptId}) =>  (
@@ -101,7 +103,7 @@ const AddTask = ({show, handleClose,users, aptId}) =>  (
       <button className='btn btn-secondary' onClick={handleClose}>
         Close
       </button>
-      <button className='btn btn-primary' onClick={() => validateForm(aptId)}>
+      <button className='btn btn-primary' onClick={() => validateForm(aptId, handleClose)}>
         Save Changes
       </button>
     </Modal.Footer>
