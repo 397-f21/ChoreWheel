@@ -22,12 +22,12 @@ const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
 function ApartmentLogin ({ onFinish, aptKeys }) {
   return (
     <form className="container">
-      <div class="form-group">
-        <label for="exampleInputEmail1">
+      <div className="form-group">
+        <label htmlFor="exampleInputEmail1">
           Apartment ID
         </label>
         <input type="name" 
-            class="form-control" 
+            className="form-control" 
             id="apt_input" 
             placeholder="Enter Aparmtent ID" />
       </div>

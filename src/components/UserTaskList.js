@@ -13,7 +13,8 @@ const UserTaskList = ({ aptId, userId, tasks, updateTask }) => (
               className="form-check-input"  
               defaultChecked={ task.completed } 
               value={task.completed} id="flexCheckDefault"
-              onChange={ () => updateTask(task.id) } />
+              onChange={ () => updateTask(task.id) } 
+              style={{ height: '1.5em', width: '1.5em' }} />
           </div>
         </Task>
         ))}
