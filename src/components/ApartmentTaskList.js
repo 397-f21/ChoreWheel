@@ -4,7 +4,7 @@ const ApartmentTaskList = ({ aptId, users, tasks}) => (
   <div>
     {
       Object.values(users).map( (user, idx) => (
-        Object.keys(user.tasks).map( (taskId, taskIdx) => (
+        user.tasks && Object.keys(user.tasks).map( (taskId, taskIdx) => (
           <Task key={ `${idx}-${taskIdx}` } 
               aptId={ aptId }
               userId={ user.id }

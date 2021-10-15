@@ -8,9 +8,10 @@ const UserButtonGroup = ({ currUser, users, setUser,children }) => (
               user={user} 
               selected={user.id === currUser}
               setUser={setUser} />
-        ))
+        ))  
       }
     </div>
+    
   )
   
   const UserButton = ({ user, selected, setUser }) => (

@@ -7,6 +7,7 @@ import ApartmentTaskList from './components/ApartmentTaskList';
 import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
 import AddTask from './components/TaskManagement';
+import AddUser from './components/UserManagement';
 
 const getTask = (taskId, apt) => (
   apt.tasks[taskId]
@@ -18,6 +19,8 @@ function App() {
   const [user, setUser] = useState('');  
   const [data, loading, error] = useData(`/apartments`);
   const [show, setShow] = useState(false);
+  const [showUserAdd, setShowUserAdd] = useState(false);
+  
 
   if (error) return <h1>{ error }</h1>;
   if (loading) return <h1>Loading the tasks...</h1>;
@@ -32,6 +35,9 @@ function App() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleAddUserClose = () => setShowUserAdd(false);
+  const handleAddUserShow = () => setShowUserAdd(true);
 
   return (
     <div>
@@ -51,18 +57,20 @@ function App() {
       <div className='container pt-2' >
         <UserButtonGroup 
             currUser={ user } 
-            users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
+            users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
             setUser={ setUser } > 
-              <button className="btn btn-success fw-bold" style={{}} onClick={handleShow}>
+              <button className="btn btn-success fw-bold m-2" style={{}} onClick={handleShow}>
                 Add Task
               </button>
+              <button className="btn btn-success fw-bold m-2" style={{}} onClick={handleAddUserShow}>Add User</button>
         </UserButtonGroup>
         <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
+        <AddUser show={showUserAdd} handleClose={handleAddUserClose} aptId ={aptId} />
         { user ?  (
           <UserTaskList 
             aptId={ aptId }
             userId={ user }
-            tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
+            tasks={ !(userData.tasks) ? [] :  Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
             updateTask={ updateTask } />
         ) : (
           <ApartmentTaskList 
