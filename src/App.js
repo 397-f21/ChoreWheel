@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useData, setData } from './firebase';
-import { FaDharmachakra } from 'react-icons/fa';
 import ApartmentLogin from './components/ApartmentLogin';
 import ApartmentTaskList from './components/ApartmentTaskList';
 import UserTaskList from './components/UserTaskList';
@@ -33,28 +32,16 @@ function App() {
     setData(`/apartments/${aptId}/users/${user}/tasks/${taskID}`, !userData.tasks[taskID])
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false); //this is for task
   const handleShow = () => setShow(true);
 
   const handleAddUserClose = () => setShowUserAdd(false);
   const handleAddUserShow = () => setShowUserAdd(true);
 
   return (
-    <div>
-
-    <div>
-      <div className='navbar navbar-light bg-light'>
-        <div className='container-fluid'>
-          <span className='navbar-brand justify-content-bottom'>
-            <FaDharmachakra size="1.7em" style={{color: '#d4af37', marginTop: '-.4em'}} />
-            <span className="h2 fw-bold"> 
-              ChoreWheel 
-            </span>
-          </span>
-        </div>
-      </div>
-
+    
       <div className='container pt-2' >
+        
         <UserButtonGroup 
             currUser={ user } 
             users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
@@ -80,12 +67,8 @@ function App() {
           />
         ) }
       </div >
-    </div>
-    </div>
     
   );
 }
-
-/* <h2 className='text-center'>Hi {userData.name}, your tasks are </h2>  */
 
 export default App;
