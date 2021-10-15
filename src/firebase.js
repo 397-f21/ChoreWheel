@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set, push, update } from 'firebase/database';
+import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
 
@@ -47,10 +47,6 @@ export const setData = (path, value) => (
   set(ref(database, path), value)
 );
 
-export const pushData = (path, value) => (
-  push(ref(database, path), value)
-);
-
 export const getRefByPush = (path) => (
   push(ref(database, path))
 )
@@ -61,4 +57,8 @@ export const updateData = (childRef, value) => (
 
 export const updateDataByPath = (path, value)=> (
   update(ref(database, path), value)
+);
+
+export const deleteData = (path) => (
+  remove(ref(database, path))
 );

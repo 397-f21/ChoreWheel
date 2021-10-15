@@ -1,14 +1,17 @@
 import Task from "./Task";
 
-const UserTaskList = ({ tasks, updateTask }) => (
+const UserTaskList = ({ aptId, userId, tasks, updateTask }) => (
     <div>
       {
         Object.values(tasks).map((task, idx) => (
-        <Task key={idx} task={task}>
-          <div >
+        <Task key={ idx }
+            aptId={ aptId }
+            userId={ userId }
+            task={ task }>
+          <div>
             <input type="checkbox"
               className="form-check-input"  
-              defaultChecked={task.completed} 
+              defaultChecked={ task.completed } 
               value={task.completed} id="flexCheckDefault"
               onChange={ () => updateTask(task.id) } />
           </div>

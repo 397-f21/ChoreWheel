@@ -60,10 +60,13 @@ function App() {
         <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
         { user ?  (
           <UserTaskList 
+            aptId={ aptId }
+            userId={ user }
             tasks={ Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
-            updateTask={ updateTask}  />
+            updateTask={ updateTask } />
         ) : (
           <ApartmentTaskList 
+            aptId={ aptId }
             users={ apt.users } 
             tasks={ apt.tasks }
           />
