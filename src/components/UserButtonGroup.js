@@ -1,6 +1,7 @@
 
-const UserButtonGroup = ({ currUser, users, setUser }) => (
+const UserButtonGroup = ({ currUser, users, setUser,children }) => (
     <div className="container text-center">
+      {children}
       {
         users.map((user, idx) => (
           <UserButton key={idx}
