@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useData, setData } from './firebase';
-import ApartmentLogin from './components/ApartmentLogin';
+import ApartmentManagement from './apartments/ApartmentManagement';
 import ApartmentTaskList from './components/ApartmentTaskList';
 import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
 import AddTask from './components/TaskManagement';
 import AddUser from './components/UserManagement';
+import {BiBuildingHouse} from 'react-icons/bi';
 
 const getTask = (taskId, apt) => (
   apt.tasks[taskId]
@@ -15,16 +16,19 @@ const getTask = (taskId, apt) => (
 
 function App() {
   const [aptId, setApt] = useState();
-  const [user, setUser] = useState('');  
-  const [data, loading, error] = useData(`/apartments`);
+  const [user, setUser] = useState('');
+  const filterList = (lst) => Object.fromEntries(Object.entries(lst).filter(([key, val]) => (key !== "-1" )));
+  const filterAptData = (aptData) => Object.fromEntries(Object.entries(aptData).map(([key, val]) => [key, filterList(val)]));
+  const filterData = (data) => Object.fromEntries(Object.entries(data).map(([aptKey, aptData]) => [aptKey, filterAptData(aptData)]));
+  const [data, loading, error] = useData(`/apartments`, filterData);
   const [show, setShow] = useState(false);
   const [showUserAdd, setShowUserAdd] = useState(false);
   
 
   if (error) return <h1>{ error }</h1>;
   if (loading) return <h1>Loading the tasks...</h1>;
-
-  if (!aptId) return <ApartmentLogin onFinish={ setApt } aptKeys={ Object.keys(data) } />;
+  
+  if (!aptId) return <ApartmentManagement onFinish={ setApt } aptKeys={ Object.keys(data) } />;
 
   const apt = data[aptId];
   const userData = apt.users[user];
@@ -41,7 +45,7 @@ function App() {
   return (
     
       <div className='container pt-2' >
-        
+        <h1 className="text-center"><BiBuildingHouse/>{aptId}</h1>
         <UserButtonGroup 
             currUser={ user } 
             users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 

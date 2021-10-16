@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
   <button type="button" 
       className="btn btn-primary" 
@@ -19,7 +18,7 @@ const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
   </button>
 );
 
-function ApartmentLogin ({ onFinish, aptKeys }) {
+function ApartmentLogin ({ onFinish, aptKeys, setShowCreate }) {
   return (
     <form className="container p-2">
       <div className="form-group">
@@ -29,12 +28,14 @@ function ApartmentLogin ({ onFinish, aptKeys }) {
         <input type="name" 
             className="form-control mb-4" 
             id="apt_input" 
-            placeholder="Enter Aparmtent ID" />
+            placeholder="Enter Apartment ID" />
       </div>
       <ApartmentLoginButton onFinish={onFinish} aptKeys={aptKeys}/>
+      <br/>
+      <button type="button" 
+      className="btn btn-secondary m-2 mx-0" onClick={() => setShowCreate()}>Create a New Apartment</button>
     </form>
   );
 };
   
 export default ApartmentLogin;
-   
