@@ -20,20 +20,20 @@ const ApartmentLoginButton = ({ onFinish, aptKeys }) => (
 
 function ApartmentLogin ({ onFinish, aptKeys, setShowCreate }) {
   return (
-    <form className="container p-2">
+    <form className="container p-2 text-center">
       <div className="form-group">
         <label htmlFor="exampleInputEmail1">
           Apartment ID
         </label>
         <input type="name" 
-            className="form-control mb-4" 
+            className="form-control mb-4 mx-auto text-center" 
+            style={{maxWidth: "700px"}}
             id="apt_input" 
             placeholder="Enter Apartment ID" />
       </div>
       <ApartmentLoginButton onFinish={onFinish} aptKeys={aptKeys}/>
       <br/>
-      <button type="button" 
-      className="btn btn-secondary m-2 mx-0" onClick={() => setShowCreate()}>Create a New Apartment</button>
+      <p className="m-0 mt-1">Don't have and apartment? <a href="#" onClick={() => setShowCreate()}> Create a new one here!</a> </p>
     </form>
   );
 };

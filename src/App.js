@@ -26,7 +26,7 @@ function App() {
   
 
   if (error) return <h1>{ error }</h1>;
-  if (loading) return <h1>Loading the tasks...</h1>;
+  if (loading) return <h1>Loading...</h1>;
   
   if (!aptId) return <ApartmentManagement onFinish={ setApt } aptKeys={ Object.keys(data) } />;
 
