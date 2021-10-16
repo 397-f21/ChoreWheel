@@ -43,46 +43,57 @@ function App() {
   const handleAddUserShow = () => setShowUserAdd(true);
 
   return (
-    
-      <div className='container pt-2' >
-        <h1 className="text-center"><BiBuildingHouse/>{aptId}</h1>
-        <UserButtonGroup 
-            currUser={ user } 
-            users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
-            setUser={ setUser } > 
-              <button className="btn btn-success fw-bold m-2" style={{}} onClick={handleShow}>
-                Add Task
-              </button>
-              <button className="btn btn-success fw-bold m-2" style={{}} onClick={handleAddUserShow}>Add User</button>
-        </UserButtonGroup>
-        <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
-        <AddUser show={showUserAdd} handleClose={handleAddUserClose} aptId ={aptId} />
-        <div className='row justify-content-center'>
-          <div className='card p-2 col-3 col-lg-2 m-1 border-success bg-success bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-            <div>Complete</div>
-          </div> 
-          <div className='card p-2 col-3 col-lg-2 m-1 border-warning bg-warning bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-            Due now
-          </div>
-          <div className='card p-2 col-3 col-lg-2 m-1 border-danger bg-danger bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-            Overdue  
-          </div>
+    <div className='container pt-2' >
+      <h1 className="text-center">
+        <BiBuildingHouse/>
+        { aptId }
+      </h1>
+
+      <UserButtonGroup currUser={ user } 
+          users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 
+          setUser={ setUser } > 
+        <button className="btn btn-success fw-bold m-2" onClick={handleShow}>
+          Add Task
+        </button>
+        <button className="btn btn-success fw-bold m-2" onClick={handleAddUserShow}>
+          Add User
+        </button>
+      </UserButtonGroup>
+
+      <AddTask show={show} 
+          handleClose={handleClose} 
+          users={Object.values(apt.users)} 
+          aptId ={aptId} />
+      <AddUser show={showUserAdd} 
+          handleClose={handleAddUserClose} 
+          aptId ={aptId} />
+
+      <div className='row justify-content-center'>
+        <div className='card p-2 col-3 col-lg-2 m-1 border-success bg-success bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
+          <div>Complete</div>
+        </div> 
+        <div className='card p-2 col-3 col-lg-2 m-1 border-warning bg-warning bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
+          Due now
         </div>
-        { user ?  (
+        <div className='card p-2 col-3 col-lg-2 m-1 border-danger bg-danger bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
+          Overdue  
+        </div>
+      </div>
+
+      { user ?  (
           <UserTaskList 
-            aptId={ aptId }
-            userId={ user }
-            tasks={ !(userData.tasks) ? [] :  Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
-            updateTask={ updateTask } />
+              aptId={ aptId }
+              userId={ user }
+              tasks={ !(userData.tasks) ? [] :  Object.keys(userData.tasks).map(taskId => ({...getTask(taskId, apt), completed:userData.tasks[taskId]})) } 
+              updateTask={ updateTask } />
         ) : (
           <ApartmentTaskList 
-            aptId={ aptId }
-            users={ apt.users } 
-            tasks={ apt.tasks }
-          />
-        ) }
-      </div >
-    
+              aptId={ aptId }
+              users={ apt.users } 
+              tasks={ apt.tasks }/>
+        ) 
+      }
+    </div>
   );
 }
 
