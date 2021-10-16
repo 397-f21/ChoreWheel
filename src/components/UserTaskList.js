@@ -3,7 +3,7 @@ import Task from "./Task";
 const UserTaskList = ({ aptId, userId, tasks, updateTask }) => (
     <div>
       {
-       ( tasks.length === 0 ) ? <h3 className="text-center">Get some tasks</h3> : 
+       ( tasks.length === 0 ) ? <h3 className="text-center">No Assigned Tasks</h3> : 
         Object.values(tasks).map((task, idx) => (
         <Task key={ idx }
             aptId={ aptId }

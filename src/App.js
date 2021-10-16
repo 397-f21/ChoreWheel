@@ -57,6 +57,17 @@ function App() {
         </UserButtonGroup>
         <AddTask show={show} handleClose={handleClose} users={Object.values(apt.users)} aptId ={aptId} />
         <AddUser show={showUserAdd} handleClose={handleAddUserClose} aptId ={aptId} />
+        <div className = 'row justify-content-center'>
+        <div className = {'card p-2 col-lg-2 mx-1 border-success bg-success bg-opacity-25 text-center'} style={{borderWidth: '4px'}}>
+          Completed 
+          </div> 
+          <div className = {'card p-2 col-lg-2 mx-1 border-warning bg-warning bg-opacity-25 text-center'} style={{borderWidth: '4px'}}>
+          Due today
+          </div>
+          <div className = {'card p-2 col-lg-2 mx-1 border-danger bg-danger bg-opacity-25 text-center'} style={{borderWidth: '4px'}}>
+          Overdue  
+          </div>
+        </div>
         { user ?  (
           <UserTaskList 
             aptId={ aptId }

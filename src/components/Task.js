@@ -16,7 +16,7 @@ const Task = ({ aptId, userId, task, children }) => {
   
     return (
     <div key={ task.id } 
-        className={`card m-2 p-2 col-lg-8 mx-auto ${ task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : 'border-dark'}`} 
+        className={`card m-2 p-2 col-lg-8 mx-auto ${ task.completed ? 'border-success bg-success bg-opacity-25': task.daysRemaining === 0 ? 'border-warning bg-warning bg-opacity-25' : task.daysRemaining < 0 ? 'border-danger bg-danger bg-opacity-25':'border-dark'}`} 
         style={{borderWidth: '4px'}} >
       <div className="d-flex justify-content-between align-items-center">
         <div className="card-body">
