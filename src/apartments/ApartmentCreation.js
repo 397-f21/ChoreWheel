@@ -8,8 +8,7 @@ const createAptData = async (onFinish, aptKeys) => {
       return
     }
     if (aptKeys.includes(input)) {
-      alert(`Specified Apartment ID "${input}" already exists; Enter a new ID`)
-      input = '';
+      alert(`Specified Apartment ID "${input}" already exists; Enter a new ID`);
     } else {
       await updateDataByPath(`/apartments/`, {[input] : 
                                   {"tasks" : {
