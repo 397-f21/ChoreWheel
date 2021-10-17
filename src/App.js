@@ -68,16 +68,12 @@ function App() {
           handleClose={handleAddUserClose} 
           aptId ={aptId} />
 
-      <div className='row justify-content-center'>
-        <div className='card p-2 col-3 col-lg-2 m-1 border-success bg-success bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-          <div>Complete</div>
+      <div className='justify-content-center'>
+        <div className='p-2  m-1 text-center ' style={{borderWidth: '4px'}}>
+          <div style={{display: 'inline-block'}} className="mx-3">Completed: <div style={{height: "1em", width: "50px", display: 'inline-block'}} className="card border-4 border-success bg-success bg-opacity-25 "></div></div>
+          <div style={{display: 'inline-block'}} className="mx-3">Due today: <div style={{height: "1em", width: "50px", display: 'inline-block'}} className="card border-4 border-warning bg-warning bg-opacity-25"></div></div>
+          <div style={{display: 'inline-block'}} className="mx-3">Overdue: <div style={{height: "1em", width: "50px", display: 'inline-block'}} className="card border-4 border-danger bg-danger bg-opacity-25"></div></div>
         </div> 
-        <div className='card p-2 col-3 col-lg-2 m-1 border-warning bg-warning bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-          Due now
-        </div>
-        <div className='card p-2 col-3 col-lg-2 m-1 border-danger bg-danger bg-opacity-25 text-center' style={{borderWidth: '4px'}}>
-          Overdue  
-        </div>
       </div>
 
       { user ?  (
