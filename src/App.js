@@ -47,7 +47,10 @@ function App() {
       <h1 className="text-center">
         <BiBuildingHouse/>
         { aptId }
+        <a href="/" className="btn btn-secondary" style={{position:'absolute', right:'2.5%'}} >Logout</a>
       </h1>
+
+
 
       <UserButtonGroup currUser={ user } 
           users={ [{id:'', name:'Full Apartment',highlight:false}, ...Object.values(apt.users).map(user => ({id:user.id, name:user.name,highlight:user.tasks && Object.keys(user.tasks).some(taskId => apt.tasks[taskId].daysRemaining === 0) }))] } 

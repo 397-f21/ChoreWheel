@@ -61,7 +61,7 @@ const ApartmentCreation = ({ onFinish, aptKeys, setShowCreate }) => (
     <ApartmentCreateButton onFinish={onFinish} aptKeys={aptKeys}/>
     <br/>
     <p className="m-0 mt-1">
-      Already have an apartment? 
+      Already have an apartment? <br/>
       <a href="#" onClick={() => setShowCreate()}> 
         Login here!
       </a> 

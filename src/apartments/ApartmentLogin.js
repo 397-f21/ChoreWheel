@@ -33,7 +33,7 @@ const ApartmentLogin = ({ onFinish, aptKeys, setShowCreate }) => (
     <ApartmentLoginButton onFinish={onFinish} aptKeys={aptKeys}/>
     <br/>
     <p className="m-0 mt-1">
-      Don't have and apartment? 
+      Don't have an apartment? <br/>
       <a href="#" onClick={() => setShowCreate()}> 
         Create a new one here!
       </a> 
