@@ -7,7 +7,8 @@ import UserTaskList from './components/UserTaskList';
 import UserButtonGroup from './components/UserButtonGroup';
 import AddTask from './components/TaskManagement';
 import AddUser from './components/UserManagement';
-import {BiBuildingHouse} from 'react-icons/bi';
+import { BiBuildingHouse } from 'react-icons/bi';
+import { GrLogout } from 'react-icons/gr';
 
 const getTask = (taskId, apt) => (
   apt.tasks[taskId]
@@ -47,7 +48,9 @@ function App() {
       <h1 className="text-center">
         <BiBuildingHouse/>
         { aptId }
-        <a href="/" className="btn btn-secondary" style={{position:'absolute', right:'2.5%'}} >Logout</a>
+        <a href="/" style={{position:'absolute', right:'2.5%'}} >
+          <GrLogout style={{border: 'solid 1px black', padding: '3px', borderRadius: '5px'}}/>
+        </a>
       </h1>
 
 
