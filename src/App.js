@@ -13,13 +13,13 @@ const getTask = (taskId, apt) => (
   apt.tasks[taskId]
 );
 
-
+const filterList = (lst) => Object.fromEntries(Object.entries(lst).filter(([key, val]) => (key !== "-1" )));
+const filterAptData = (aptData) => Object.fromEntries(Object.entries(aptData).map(([key, val]) => [key, filterList(val)]));
+const filterData = (data) => Object.fromEntries(Object.entries(data).map(([aptKey, aptData]) => [aptKey, filterAptData(aptData)]));
+  
 function App() {
   const [aptId, setApt] = useState();
   const [user, setUser] = useState('');
-  const filterList = (lst) => Object.fromEntries(Object.entries(lst).filter(([key, val]) => (key !== "-1" )));
-  const filterAptData = (aptData) => Object.fromEntries(Object.entries(aptData).map(([key, val]) => [key, filterList(val)]));
-  const filterData = (data) => Object.fromEntries(Object.entries(data).map(([aptKey, aptData]) => [aptKey, filterAptData(aptData)]));
   const [data, loading, error] = useData(`/apartments`, filterData);
   const [show, setShow] = useState(false);
   const [showUserAdd, setShowUserAdd] = useState(false);
