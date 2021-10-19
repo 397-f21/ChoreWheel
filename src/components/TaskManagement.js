@@ -86,7 +86,11 @@ const AddTask = ({show, handleClose,users, aptId}) =>  (
         </div>
         <div className="form-group p-2">
           <label htmlFor="interval">Repeat interval:</label>
-          <input className="form-control" id="interval" type="number" min="1" step="1" pattern="\d+" placeholder="How often the task should rotate"/>
+          <div className="input-group">
+            <input className="form-control" id="interval" type="number" min="1" step="1" pattern="\d+" placeholder="Repeat every ____ days"/>
+            <span class="input-group-text" id="basic-addon2">days</span>
+          </div>
+          
         </div>
         <div className="form-group p-2">
           <label htmlFor="dueDate">First due date:</label>

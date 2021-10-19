@@ -1,17 +1,16 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set, push, update } from 'firebase/database';
+import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyC-GZHRx2kkBDY-eVJAPSKr6lJ0XW-8FTw",
-  authDomain: "chorewheel-gold.firebaseapp.com",
-  databaseURL: "https://chorewheel-gold-default-rtdb.firebaseio.com",
-  projectId: "chorewheel-gold",
-  storageBucket: "chorewheel-gold.appspot.com",
-  messagingSenderId: "921593314891",
-  appId: "1:921593314891:web:88633bdf1bfc1c380417ce",
-  measurementId: "G-Q807LY7X13"
+  apiKey: "AIzaSyCvsKdL8xPuCvNJpYNAPbpFRBb9yPnsFOI",
+  authDomain: "chorewheelv2.firebaseapp.com",
+  databaseURL: "https://chorewheelv2-default-rtdb.firebaseio.com",
+  projectId: "chorewheelv2",
+  storageBucket: "chorewheelv2.appspot.com",
+  messagingSenderId: "378499330161",
+  appId: "1:378499330161:web:5123dc86f365fbae2febd0",
+  measurementId: "G-P5VQ22NQRM"
 };
 
 const firebase = initializeApp(firebaseConfig);
@@ -47,10 +46,6 @@ export const setData = (path, value) => (
   set(ref(database, path), value)
 );
 
-export const pushData = (path, value) => (
-  push(ref(database, path), value)
-);
-
 export const getRefByPush = (path) => (
   push(ref(database, path))
 )
@@ -61,4 +56,8 @@ export const updateData = (childRef, value) => (
 
 export const updateDataByPath = (path, value)=> (
   update(ref(database, path), value)
+);
+
+export const deleteData = (path) => (
+  remove(ref(database, path))
 );
